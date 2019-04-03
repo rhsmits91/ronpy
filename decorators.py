@@ -7,7 +7,7 @@ import inspect
 from .logger import logger
 
 
-def annotation_validator(try_casting=True):
+def validate_annotation(try_casting=True):
     """
     Uses a function's annotations to validate user passed parameters, and
     potentially cast them to the right datatypes (as given by the annotations).
@@ -55,8 +55,13 @@ def annotation_validator(try_casting=True):
                     pass
                 elif try_casting:
                     try:
-                        v = annotation(v)
-                        kwargs.update({k: v})
+                        v_new = annotation(v)
+                        kwargs.update({k: v_new})
+                        logger.info(
+                            f'Value {v} for parameter {k} successfully turned'
+                            f' into annoted type {annotation}.'
+                        )
+
                     except (ValueError, TypeError) as e:
                         logger.critical(
                             f'Parameter {k} should be of type {annotation}'
@@ -73,3 +78,4 @@ def annotation_validator(try_casting=True):
             return func(**kwargs)
         return wrapper
     return decorator
+

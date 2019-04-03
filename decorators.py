@@ -7,7 +7,7 @@ import inspect
 from .logger import logger
 
 
-def validate_annotation(try_casting=True):
+def validate_annotation(try_casting=False):
     """
     Uses a function's annotations to validate user passed parameters, and
     potentially cast them to the right datatypes (as given by the annotations).

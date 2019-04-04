@@ -1,1 +1,8 @@
-ronpy.egg-info/*
+# root:
+ronpy.egg-info
+.pytest_cache
+
+# everywhere:
+__pycache__
+.coverage
+cov.xml

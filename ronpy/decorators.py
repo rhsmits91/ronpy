@@ -45,8 +45,8 @@ def validate_annotation(try_casting=False):
                 annotation = annotations.get(k, None)
                 if annotation is None:
                     logger.warning(
-                        f'Parameter {k} cannot be validated as no annotation '
-                        f'is known. Continuing...'
+                        f'Parameter `{k}` cannot be validated as no ' 
+                        f'annotation is set. Continuing...'
                     )
                     continue
                 
@@ -58,22 +58,22 @@ def validate_annotation(try_casting=False):
                         v_new = annotation(v)
                         kwargs.update({k: v_new})
                         logger.info(
-                            f'Value {v} for parameter {k} successfully turned'
-                            f' into annoted type {annotation}.'
+                            f'Value `{v}` for parameter `{k}` successfully '
+                            f'turned into annotated type <{annotation}>.'
                         )
 
                     except (ValueError, TypeError) as e:
                         logger.critical(
-                            f'Parameter {k} should be of type {annotation}'
-                            f' but passed value {v} cannot be turned into '
-                            f'{annotation}'
+                            f'Parameter `{k}` should be of type <{annotation}>'
+                            f' but passed value `{v}` cannot be turned into '
+                            f'<{annotation}>'
                         )
                         raise e
                 else:
                     raise ValueError(
-                        f'Parameter {k} should be of type {annotation}'
-                        f' but passed value {v} cannot be turned into '
-                        f'{annotation}'
+                        f'Parameter `{k}` should be of type <{annotation}>'
+                        f' but passed value `{v}` cannot be turned into '
+                        f'<{annotation}>'
                     )
             return func(**kwargs)
         return wrapper
